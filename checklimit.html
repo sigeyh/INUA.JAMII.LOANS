@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Loan Eligibility | Inuka Credit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(150deg, #fff9c4, #fdd835, #fb8c00);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 16px;
+      color: #1a1a1a;
+    }
+
+    /* ── Logo ── */
+    .logo-wrap {
+      margin-bottom: 12px;
+    }
+    .logo-wrap img {
+      height: 48px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+    }
+
+    /* ── Greeting ── */
+    .greeting {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #5d3900;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+    .greeting span { color: #b84d00; }
+
+    .sub-heading {
+      font-size: 0.82rem;
+      color: #7a5000;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    /* ── Canvas wrapper ── */
+    .canvas-wrap {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      margin-bottom: 28px;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── Info cards ── */
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: 100%;
+      max-width: 360px;
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .info-cards.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .info-card {
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 14px;
+      padding: 12px 8px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .info-card .ic-icon { font-size: 1.3rem; margin-bottom: 5px; }
+    .info-card .ic-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: #8d6000;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 3px;
+    }
+    .info-card .ic-value {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #212121;
+    }
+
+    /* ── CTA Button ── */
+    #viewSavings {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 360px;
+      padding: 16px;
+      background: linear-gradient(135deg, #e65100, #fb8c00);
+      border: none;
+      border-radius: 14px;
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 800;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(230,81,0,0.4);
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.4s;
+      opacity: 0;
+      pointer-events: none;
+      letter-spacing: 0.2px;
+    }
+    #viewSavings.revealed {
+      opacity: 1;
+      pointer-events: all;
+    }
+    #viewSavings:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(230,81,0,0.45);
+    }
+    #viewSavings:active { transform: translateY(0); }
+
+    /* Arrow icon */
+    #viewSavings svg { flex-shrink: 0; }
+
+    /* ── Overlay ── */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+      z-index: 99;
+    }
+    .overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .overlay img { width: 80px; height: 80px; }
+    .overlay p {
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 380px) {
+      .canvas-wrap { width: 220px; height: 220px; }
+      .info-card .ic-value { font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo -->
+  <div class="logo-wrap">
+    <img src="inukalogo.png" alt="Inuka Credit" onerror="this.style.display='none'">
+  </div>
+
+  <!-- Greeting -->
+  <p class="greeting">Great news, <span id="greetName">there</span>! 🎉</p>
+  <p class="sub-heading">Your loan eligibility has been assessed</p>
+
+  <!-- Canvas progress ring -->
+  <div class="canvas-wrap">
+    <canvas id="progressCanvas"></canvas>
+  </div>
+
+  <!-- Info cards (appear after animation) -->
+  <div class="info-cards" id="infoCards">
+    <div class="info-card">
+      <div class="ic-icon">💰</div>
+      <div class="ic-label">Loan Limit</div>
+      <div class="ic-value" id="cardLimit">—</div>
+    </div>
+    <div class="info-card">
+      <div class="ic-icon">📅</div>
+      <div class="ic-label">Repayment</div>
+      <div class="ic-value">30 Days</div>
+    </div>
+    <div class="info-card">
+      <div class="ic-icon">🧾</div>
+      <div class="ic-label">Service Fee</div>
+      <div class="ic-value" id="cardFee">—</div>
+    </div>
+  </div>
+
+  <!-- CTA button -->
+  <button id="viewSavings">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+      <path d="M12 8v8M8 12l4 4 4-4"/>
+    </svg>
+    Get My Loan
+  </button>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay">
+    <img src="pro.gif" alt="Loading..." onerror="this.style.display='none'">
+    <p>Preparing your loan offer…</p>
+  </div>
+
+  <script>
+    // ── Load user data ──────────────────────────────────────────────────
+    const firstName = localStorage.getItem('firstname') || '';
+    if (firstName) document.getElementById('greetName').textContent = firstName;
+
+    let savingAmount = localStorage.getItem('savingAmount');
+    if (!savingAmount) {
+      savingAmount = Math.floor(Math.random() * (110 - 95 + 1)) + 95;
+      localStorage.setItem('savingAmount', savingAmount);
+    }
+
+    function fmt(n) { return parseInt(n).toLocaleString('en-KE'); }
+
+    // ── Canvas setup with HiDPI fix ──────────────────────────────────────
+    const canvas  = document.getElementById('progressCanvas');
+    const ctx     = canvas.getContext('2d');
+    const dpr     = window.devicePixelRatio || 1;
+    const SIZE    = canvas.offsetWidth || 260;
+
+    canvas.width  = SIZE * dpr;
+    canvas.height = SIZE * dpr;
+    ctx.scale(dpr, dpr);
+
+    const centerX = SIZE / 2;
+    const centerY = SIZE / 2;
+    const radius  = SIZE * 0.42;
+
+    // ── Generate target loan value (persists across refreshes) ──────────
+    function generateTarget() {
+      const min = 300, max = 700;
+      return (Math.floor(Math.random() * (max - min + 1)) + min) * 5;
+    }
+    let targetValue = parseInt(localStorage.getItem('targetValue'));
+    if (!targetValue || isNaN(targetValue)) {
+      targetValue = generateTarget();
+      localStorage.setItem('targetValue', targetValue);
+    }
+    let   currentValue = 0;
+    let   startTime    = null;
+    const duration     = 3000;
+
+    // ── Draw ring ────────────────────────────────────────────────────────
+    function drawProgress(value) {
+      ctx.clearRect(0, 0, SIZE, SIZE);
+
+      // Outer glow shadow
+      ctx.shadowBlur  = 0;
+      ctx.shadowColor = 'transparent';
+
+      // Track ring
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+      ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+      ctx.lineWidth   = 18;
+      ctx.lineCap     = 'round';
+      ctx.stroke();
+
+      // Progress arc
+      const progress = value / targetValue;
+      const endAngle = -Math.PI / 2 + progress * 2 * Math.PI;
+
+      const grad = ctx.createLinearGradient(0, 0, SIZE, SIZE);
+      grad.addColorStop(0, '#ff6f00');
+      grad.addColorStop(1, '#fdd835');
+
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, -Math.PI / 2, endAngle);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth   = 18;
+      ctx.lineCap     = 'round';
+      ctx.shadowBlur  = 16;
+      ctx.shadowColor = 'rgba(255,111,0,0.5)';
+      ctx.stroke();
+      ctx.shadowBlur  = 0;
+
+      // Centre label
+      ctx.fillStyle    = '#5d3900';
+      ctx.font         = `600 ${SIZE * 0.052}px Inter, sans-serif`;
+      ctx.textAlign    = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('LOAN LIMIT', centerX, centerY - SIZE * 0.1);
+
+      // Centre value
+      ctx.fillStyle    = '#212121';
+      ctx.font         = `900 ${SIZE * 0.1}px Inter, sans-serif`;
+      ctx.fillText('Ksh ' + fmt(value), centerX, centerY + SIZE * 0.04);
+
+      // Percentage pill background
+      if (progress > 0.05) {
+        const pct = Math.round(progress * 100);
+        ctx.fillStyle = 'rgba(255,111,0,0.12)';
+        const pillW = SIZE * 0.28, pillH = SIZE * 0.09;
+        roundRect(ctx, centerX - pillW / 2, centerY + SIZE * 0.16, pillW, pillH, pillH / 2);
+        ctx.fill();
+        ctx.fillStyle = '#e65100';
+        ctx.font      = `700 ${SIZE * 0.055}px Inter, sans-serif`;
+        ctx.fillText(pct + '% assessed', centerX, centerY + SIZE * 0.205);
+      }
+    }
+
+    function roundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
+
+    // ── Animate ──────────────────────────────────────────────────────────
+    function animateProgress(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const ratio   = Math.min(elapsed / duration, 1);
+
+      // Ease out cubic
+      const eased  = 1 - Math.pow(1 - ratio, 3);
+      currentValue = Math.round((eased * targetValue) / 5) * 5;
+      drawProgress(currentValue);
+
+      if (ratio < 1) {
+        requestAnimationFrame(animateProgress);
+      } else {
+        // Save & reveal UI
+        localStorage.setItem('targetValue', targetValue);
+        revealUI();
+      }
+    }
+
+    function revealUI() {
+      // Fill info cards
+      document.getElementById('cardLimit').textContent = 'Ksh ' + fmt(targetValue);
+      document.getElementById('cardFee').textContent   = 'Ksh ' + fmt(savingAmount);
+
+      // Show cards with animation
+      document.getElementById('infoCards').classList.add('visible');
+
+      // Reveal button after short delay
+      setTimeout(() => {
+        document.getElementById('viewSavings').classList.add('revealed');
+      }, 300);
+    }
+
+    requestAnimationFrame(animateProgress);
+
+    // ── Get Loan button ──────────────────────────────────────────────────
+    document.getElementById('viewSavings').addEventListener('click', () => {
+      document.getElementById('overlay').classList.add('show');
+      setTimeout(() => {
+        window.location.href = 'verification.html';
+      }, 1800);
+    });
+  </script>
+</body>
+</html>

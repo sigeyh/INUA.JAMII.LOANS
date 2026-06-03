@@ -2,34 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Confirm Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirm Details | Inuka Credit</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: linear-gradient(135deg, #fff9c4 0%, #fdd835 50%, #fb8c00 100%);
+    }
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    .info-row {
+      border-bottom: 1.5px dashed rgba(251, 191, 36, 0.3);
+      padding: 1rem 0;
+    }
+    .info-row:last-child {
+      border-bottom: none;
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-yellow-500 via-yellow-200 to-white min-h-screen flex items-center justify-center p-4 text-black">
+<body class="min-h-screen flex items-center justify-center p-4">
 
-  <div class="w-full max-w-md bg-white/60 backdrop-blur-lg border border-yellow-300 rounded-2xl shadow-2xl p-6">
-    <h1 class="text-2xl font-bold text-center text-yellow-900 mb-4">Confirm Your Details</h1>
-
-    <div class="space-y-3 text-sm">
-      <div class="flex justify-between"><span class="font-semibold text-gray-700">Last Name:</span> <span id="lastname">Loading...</span></div>
-      <div class="flex justify-between"><span class="font-semibold text-gray-700">First Name:</span> <span id="firstname">Loading...</span></div>
-      <div class="flex justify-between"><span class="font-semibold text-gray-700">Phone Number:</span> <span id="phone">Loading...</span></div>
-      <div class="flex justify-between"><span class="font-semibold text-gray-700">ID Number:</span> <span id="idnumber">Loading...</span></div>
-      <div class="flex justify-between"><span class="font-semibold text-gray-700">Email:</span> <span id="email">Loading...</span></div>
-      <div class="flex justify-between"><span class="font-semibold text-gray-700">Location:</span> <span id="location">Loading...</span></div>
-      <div class="flex justify-between"><span class="font-semibold text-gray-700">Date of Birth:</span> <span id="dob">Loading...</span></div>
+  <div class="w-full max-w-md glass-panel rounded-3xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] p-8">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-amber-100 mb-4">
+        <img src="inukalogo.png" alt="Logo" class="w-10">
+      </div>
+      <h1 class="text-2xl font-extrabold text-slate-900">Review Information</h1>
+      <p class="text-slate-500 mt-2 font-medium">Please ensure everything is correct.</p>
     </div>
 
-    <button onclick="confirmDetails()"
-      class="w-full mt-6 py-3 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-lg transition duration-300 shadow-md">
-      Confirm
-    </button>
+    <div class="space-y-1 mb-10">
+      <div class="info-row flex justify-between items-center">
+        <span class="text-xs font-extrabold text-slate-400 uppercase tracking-widest">Full Name</span>
+        <span class="font-bold text-slate-900" id="fullname">Loading...</span>
+      </div>
+      <div class="info-row flex justify-between items-center">
+        <span class="text-xs font-extrabold text-slate-400 uppercase tracking-widest">Phone Number</span>
+        <span class="font-bold text-slate-900" id="phone">Loading...</span>
+      </div>
+      <div class="info-row flex justify-between items-center">
+        <span class="text-xs font-extrabold text-slate-400 uppercase tracking-widest">ID Number</span>
+        <span class="font-bold text-slate-900" id="idnumber">Loading...</span>
+      </div>
+      <div class="info-row flex justify-between items-center">
+        <span class="text-xs font-extrabold text-slate-400 uppercase tracking-widest">Email</span>
+        <span class="font-bold text-slate-900" id="email">Loading...</span>
+      </div>
+      <div class="info-row flex justify-between items-center">
+        <span class="text-xs font-extrabold text-slate-400 uppercase tracking-widest">Location</span>
+        <span class="font-bold text-slate-900" id="location">Loading...</span>
+      </div>
+      <div class="info-row flex justify-between items-center">
+        <span class="text-xs font-extrabold text-slate-400 uppercase tracking-widest">Date of Birth</span>
+        <span class="font-bold text-slate-900" id="dob">Loading...</span>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <button onclick="confirmDetails()"
+        class="w-full py-4 bg-amber-600 hover:bg-amber-700 text-white rounded-2xl font-extrabold text-lg shadow-[0_20px_40px_-10px_rgba(217,119,6,0.3)] transition-all transform hover:-translate-y-1 active:scale-95">
+        Confirm & Continue
+      </button>
+      <button onclick="window.history.back()"
+        class="w-full py-3.5 bg-white border-2 border-slate-100 text-slate-400 hover:text-slate-600 hover:border-slate-300 rounded-2xl font-bold transition-all">
+        Edit Details
+      </button>
+    </div>
   </div>
 
   <script>
-    document.getElementById('lastname').textContent = localStorage.getItem('lastname') || 'Not provided';
-    document.getElementById('firstname').textContent = localStorage.getItem('firstname') || 'Not provided';
+    const firstName = localStorage.getItem('firstname') || '';
+    const lastName = localStorage.getItem('lastname') || '';
+    
+    document.getElementById('fullname').textContent = (firstName + ' ' + lastName).trim() || 'Not provided';
     document.getElementById('phone').textContent = localStorage.getItem('phone') || 'Not provided';
     document.getElementById('idnumber').textContent = localStorage.getItem('idnumber') || 'Not provided';
     document.getElementById('email').textContent = localStorage.getItem('email') || 'Not provided';

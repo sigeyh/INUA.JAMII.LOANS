@@ -2,104 +2,167 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Referral Application</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application Details | Inuka Credit</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: linear-gradient(135deg, #fff9c4 0%, #fdd835 50%, #fb8c00 100%);
+    }
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    .input-field {
+      background: rgba(255, 255, 255, 0.5);
+      border: 1.5px solid rgba(251, 191, 36, 0.3);
+      transition: all 0.2s ease;
+    }
+    .input-field:focus {
+      border-color: #d97706;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.2);
+    }
+    .step-indicator {
+      width: 40px;
+      height: 6px;
+      border-radius: 3px;
+      background: #e2e8f0;
+      transition: all 0.3s ease;
+    }
+    .step-indicator.active {
+      background: #d97706;
+      width: 60px;
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-yellow-500 via-yellow-200 to-white min-h-screen flex items-center justify-center p-4">
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
 
-  <div class="w-full max-w-2xl bg-white/70 backdrop-blur-xl border border-yellow-300 shadow-xl rounded-2xl p-6 text-black">
-    <h1 class="text-2xl font-bold text-center text-yellow-900 mb-6">Referral Application</h1>
+  <div class="w-full max-w-2xl glass-panel rounded-3xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] p-8 my-8">
+    <div class="flex justify-center gap-2 mb-8">
+      <div class="step-indicator"></div>
+      <div class="step-indicator active"></div>
+      <div class="step-indicator"></div>
+    </div>
 
-    <form id="referralForm" class="space-y-6">
+    <div class="text-center mb-10">
+      <h1 class="text-3xl font-extrabold text-slate-900">Application Details</h1>
+      <p class="text-slate-500 mt-2 font-medium">Almost there! Tell us a bit more about yourself.</p>
+    </div>
 
+    <form id="referralForm" class="space-y-8">
+      
+      <!-- Financial Section -->
       <section>
-        <h2 class="text-lg font-semibold text-yellow-800 border-b-2 border-yellow-500 pb-1 mb-4">Financial & Educational Info</h2>
+        <h2 class="text-sm font-extrabold text-amber-700 uppercase tracking-widest mb-6 flex items-center gap-3">
+          <span class="w-2 h-2 rounded-full bg-amber-600"></span>
+          Financial & Educational Background
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-bold text-slate-700 mb-2 ml-1">Education Level</label>
+            <select id="education" name="education" required class="input-field w-full px-5 py-3.5 rounded-2xl focus:outline-none appearance-none bg-no-repeat bg-[right_1.25rem_center] bg-[length:1em_1em]" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')">
+              <option value="">-- Select --</option>
+              <option value="primary">Primary</option>
+              <option value="secondary">Secondary</option>
+              <option value="diploma">Diploma</option>
+              <option value="bachelor">Bachelor's</option>
+              <option value="master">Master's</option>
+            </select>
+          </div>
 
-        <label class="block mb-2 font-medium">Level of Education:</label>
-        <select id="education" name="education" required class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400">
-          <option value="">-- Select Education Level --</option>
-          <option value="primary">Primary</option>
-          <option value="secondary">Secondary</option>
-          <option value="diploma">Diploma</option>
-          <option value="bachelor">Bachelor's Degree</option>
-          <option value="master">Master's Degree</option>
-          <option value="phd">PhD</option>
-        </select>
+          <div>
+            <label class="block text-sm font-bold text-slate-700 mb-2 ml-1">Employment</label>
+            <select id="employment" name="employment" required class="input-field w-full px-5 py-3.5 rounded-2xl focus:outline-none appearance-none bg-no-repeat bg-[right_1.25rem_center] bg-[length:1em_1em]" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')">
+              <option value="">-- Select --</option>
+              <option value="employed">Employed</option>
+              <option value="self-employed">Self-employed</option>
+              <option value="unemployed">Unemployed</option>
+              <option value="student">Student</option>
+            </select>
+          </div>
 
-        <label class="block mt-4 mb-2 font-medium">Employment Status:</label>
-        <select id="employment" name="employment" required class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400">
-          <option value="">-- Select Employment Status --</option>
-          <option value="employed">Employed</option>
-          <option value="self-employed">Self-employed</option>
-          <option value="unemployed">Unemployed</option>
-          <option value="student">Student</option>
-          <option value="retired">Retired</option>
-        </select>
+          <div>
+            <label class="block text-sm font-bold text-slate-700 mb-2 ml-1">Monthly Income (Ksh)</label>
+            <input type="number" id="monthlyIncome" name="monthlyIncome" required placeholder="e.g. 25000"
+              class="input-field w-full px-5 py-3.5 rounded-2xl focus:outline-none" />
+          </div>
 
-        <label class="block mt-4 mb-2 font-medium">Monthly Income:</label>
-        <input type="number" id="monthlyIncome" name="monthlyIncome" required placeholder="e.g. 25000"
-          class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
-
-        <label class="block mt-4 mb-2 font-medium">Loan Purpose:</label>
-        <select id="loanPurpose" name="loanPurpose" required class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400">
-          <option value="">-- Select type of Loan --</option>
-          <option value="personal">Personal Loan</option>
-          <option value="business">Business Loan</option>
-          <option value="medical">Medical Loan</option>
-          <option value="emergency">Emergency Loan</option>
-          <option value="car">Car Financing Loan</option>
-        </select>
+          <div>
+            <label class="block text-sm font-bold text-slate-700 mb-2 ml-1">Loan Purpose</label>
+            <select id="loanPurpose" name="loanPurpose" required class="input-field w-full px-5 py-3.5 rounded-2xl focus:outline-none appearance-none bg-no-repeat bg-[right_1.25rem_center] bg-[length:1em_1em]" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')">
+              <option value="">-- Select --</option>
+              <option value="personal">Personal</option>
+              <option value="business">Business</option>
+              <option value="medical">Medical</option>
+              <option value="emergency">Emergency</option>
+            </select>
+          </div>
+        </div>
       </section>
 
+      <!-- Referral Section -->
       <section>
-        <h2 class="text-lg font-semibold text-yellow-800 border-b-2 border-yellow-500 pb-1 mb-4">Referral Contact Details</h2>
+        <h2 class="text-sm font-extrabold text-amber-700 uppercase tracking-widest mb-6 flex items-center gap-3">
+          <span class="w-2 h-2 rounded-full bg-amber-600"></span>
+          Emergency Contact (Referral)
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="md:col-span-1">
+            <label class="block text-sm font-bold text-slate-700 mb-2 ml-1">Full Name</label>
+            <input type="text" id="referralName" name="referralName" required placeholder="Full Name"
+              class="input-field w-full px-5 py-3.5 rounded-2xl focus:outline-none" />
+          </div>
 
-        <label class="block mb-2 font-medium">Referral Name:</label>
-        <input type="text" id="referralName" name="referralName" required placeholder="e.g. John Doe"
-          class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
+          <div class="md:col-span-1">
+            <label class="block text-sm font-bold text-slate-700 mb-2 ml-1">Phone Number</label>
+            <input type="tel" id="referralPhone" name="referralPhone" required placeholder="07xx xxx xxx"
+              class="input-field w-full px-5 py-3.5 rounded-2xl focus:outline-none" />
+          </div>
 
-        <label class="block mt-4 mb-2 font-medium">Referral Phone:</label>
-        <input type="tel" id="referralPhone" name="referralPhone" required placeholder="e.g. 0712345678"
-          class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
-
-        <label class="block mt-4 mb-2 font-medium">Relationship:</label>
-        <input type="text" id="relationship" name="relationship" required placeholder="e.g. Friend"
-          class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400" /> 
+          <div class="md:col-span-2">
+            <label class="block text-sm font-bold text-slate-700 mb-2 ml-1">Relationship</label>
+            <input type="text" id="relationship" name="relationship" required placeholder="e.g. Sibling, Friend, Colleague"
+              class="input-field w-full px-5 py-3.5 rounded-2xl focus:outline-none" /> 
+          </div>
+        </div>
       </section>
 
       <button type="button" id="submitButton"
-        class="w-full mt-6 py-3 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-lg transition duration-300 shadow-md">
-        Submit Referral
+        class="w-full py-5 bg-amber-600 hover:bg-amber-700 text-white rounded-2xl font-extrabold text-lg shadow-[0_20px_40px_-10px_rgba(217,119,6,0.5)] transition-all transform hover:-translate-y-1 active:scale-95">
+        Complete Application
       </button>
     </form>
-
-    <footer class="text-center text-gray-600 text-sm mt-6">&copy; 2025 Inua Loans</footer>
+    
+    <p class="text-center text-slate-400 text-xs mt-10 font-bold uppercase tracking-widest">&copy; 2025 Inuka Loans • Secure & Confidential</p>
   </div>
 
-  <!-- Overlay -->
-  <div id="overlay" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 hidden items-center justify-center z-50">
-    <img src="pro.gif" alt="Loading..." class="w-20 h-20">
+  <!-- Loading Overlay -->
+  <div id="overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md hidden flex-col items-center justify-center z-50">
+    <div class="w-16 h-16 border-4 border-amber-600 border-t-transparent rounded-full animate-spin mb-4"></div>
+    <p class="text-white font-bold tracking-tight">Processing Application...</p>
   </div>
 
   <script>
     document.getElementById("submitButton").addEventListener("click", function () {
       const form = document.getElementById("referralForm");
       const overlay = document.getElementById("overlay");
-      const inputs = form.querySelectorAll("input[required], select[required]");
-      let isValid = true;
-
-      inputs.forEach(input => {
-        if (!input.value.trim()) {
-          isValid = false;
-          input.classList.add("border-red-500");
-        } else {
-          input.classList.remove("border-red-500");
-        }
-      });
-
-      if (!isValid) {
-        alert("Please fill in all required fields before proceeding.");
+      
+      if (!form.checkValidity()) {
+        alert("Please fill in all required fields.");
         return;
       }
 
@@ -108,7 +171,7 @@
 
       setTimeout(() => {
         window.location.href = "checklimit.html";
-      }, 2000);
+      }, 2500);
     });
   </script>
 </body>

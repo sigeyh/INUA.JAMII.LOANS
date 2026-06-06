@@ -16,7 +16,7 @@
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background: linear-gradient(135deg, #fff9c4 0%, #fdd835 50%, #fb8c00 100%);
+      background: linear-gradient(135deg, #FFF5D6 0%, #F5E0A0 50%, #E8A830 100%);
     }
     .glass-panel {
       background: rgba(255, 255, 255, 0.85);
@@ -30,9 +30,9 @@
       transition: all 0.2s ease;
     }
     .input-field:focus {
-      border-color: #d97706;
+      border-color: #D4941C;
       background: white;
-      box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.2);
+      box-shadow: 0 0 0 4px rgba(212, 148, 28, 0.2);
     }
     .step-indicator {
       width: 40px;
@@ -42,7 +42,7 @@
       transition: all 0.3s ease;
     }
     .step-indicator.active {
-      background: #d97706;
+      background: #4A1A0A;
       width: 60px;
     }
   </style>
@@ -142,7 +142,7 @@
       </section>
 
       <button type="button" id="submitButton"
-        class="w-full py-5 bg-amber-600 hover:bg-amber-700 text-white rounded-2xl font-extrabold text-lg shadow-[0_20px_40px_-10px_rgba(217,119,6,0.5)] transition-all transform hover:-translate-y-1 active:scale-95">
+        class="w-full py-5 bg-[#4A1A0A] hover:bg-[#3D1008] text-white rounded-2xl font-extrabold text-lg shadow-[0_20px_40px_-10px_rgba(74,26,10,0.5)] transition-all transform hover:-translate-y-1 active:scale-95">
         Complete Application
       </button>
     </form>
@@ -152,7 +152,7 @@
 
   <!-- Loading Overlay -->
   <div id="overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md hidden flex-col items-center justify-center z-50">
-    <div class="w-16 h-16 border-4 border-amber-600 border-t-transparent rounded-full animate-spin mb-4"></div>
+    <div class="w-16 h-16 border-4 border-[#4A1A0A] border-t-transparent rounded-full animate-spin mb-4"></div>
     <p class="text-white font-bold tracking-tight">Processing Application...</p>
   </div>
 

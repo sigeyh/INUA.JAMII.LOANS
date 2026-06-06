@@ -14,7 +14,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    background-color: #FFF5D6;
     padding: 10px;
   }
   
@@ -56,7 +56,7 @@
   
   /* Button Styling */
   .button {
-    background-color: blue;
+    background-color: #4A1A0A;
     color: white;
     padding: 12px 18px;
     font-size: 16px;
@@ -71,7 +71,7 @@
   }
   
   .button:hover {
-    background-color: darkblue;
+    background-color: #3D1008;
   }
   
   /* Responsive Design */

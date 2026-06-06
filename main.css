@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 50px;
-    background-color:rgba(131, 180, 131, 0.59);
+    background-color: #FFF5D6;
     color: #333;
 }
 
@@ -32,7 +32,7 @@ ol li {
 
 /* Button styles */
 button {
-    background-color: green;
+    background-color: #4A1A0A;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -44,7 +44,7 @@ button {
 }
 
 button:hover {
-    background-color: darkgreen;
+    background-color: #3D1008;
 }
 
 /* Header styles */

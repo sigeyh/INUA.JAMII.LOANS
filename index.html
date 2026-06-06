@@ -1,79 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Inuka Credit - Quick, reliable, and accessible financial solutions for your growth.">
-  <title>Welcome to Inuka Credit</title>
-  
+  <meta name="description"
+    content="Inua Jamii Loans - Quick, reliable, and accessible financial solutions for your growth.">
+  <title>Welcome to Inua Jamii Loans</title>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <!-- Custom Styles -->
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       overflow-x: hidden;
     }
+
     .hero-gradient {
       background: radial-gradient(circle at top right, #fbbf24 0%, #f59e0b 20%, #ffffff 60%);
     }
+
     .glass-card {
       background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.4);
     }
+
     .float-anim {
       animation: float 6s ease-in-out infinite;
     }
+
     @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
     }
+
     .reveal {
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
     .reveal.active {
       opacity: 1;
       transform: translateY(0);
     }
   </style>
 </head>
+
 <body class="hero-gradient min-h-screen text-slate-900">
 
   <!-- Navigation -->
   <nav class="p-6 flex justify-between items-center max-w-6xl mx-auto">
     <div class="flex items-center gap-2">
-      <img src="inukalogo.png" alt="Inuka Logo" class="h-10">
-      <span class="font-extrabold text-xl tracking-tight text-amber-900">INUKA</span>
+      <img src="logo.jpg" alt="Inua Jamii Logo" class="h-10">
+      <span class="font-extrabold text-xl tracking-tight text-amber-900">INUA JAMII</span>
     </div>
     <div class="flex gap-4">
-      <a href="register.html" class="px-6 py-2 rounded-full font-bold text-amber-900 bg-white/40 hover:bg-white/60 transition-all">Login</a>
+      <a href="register.html"
+        class="px-6 py-2 rounded-full font-bold text-amber-900 bg-white/40 hover:bg-white/60 transition-all">Login</a>
     </div>
   </nav>
 
   <!-- Hero Section -->
   <main class="max-w-6xl mx-auto px-6 pt-12 pb-24 grid lg:grid-cols-2 gap-12 items-center">
-    
+
     <div class="reveal active">
-      <span class="inline-block px-4 py-1 rounded-full bg-amber-100 text-amber-700 text-sm font-bold mb-6">#1 Trusted Loan Partner</span>
+      <span class="inline-block px-4 py-1 rounded-full bg-amber-100 text-amber-700 text-sm font-bold mb-6">#1 Trusted
+        Loan Partner</span>
       <h1 class="text-5xl lg:text-7xl font-extrabold leading-tight mb-8">
         Your Bright <span class="text-amber-600">Financial</span> Future Starts Here.
       </h1>
       <p class="text-lg text-slate-600 mb-10 max-w-md leading-relaxed">
         Access quick, low-interest loans tailored to your needs. No hidden fees, just pure growth.
       </p>
-      
+
       <div class="flex flex-col sm:flex-row gap-4">
-        <button id="getStartedBtn" class="px-10 py-5 bg-amber-600 hover:bg-amber-700 text-white rounded-2xl font-bold text-lg shadow-[0_20px_40px_-10px_rgba(217,119,6,0.5)] transition-all transform hover:-translate-y-1 active:scale-95">
+        <button id="getStartedBtn"
+          class="px-10 py-5 bg-amber-600 hover:bg-amber-700 text-white rounded-2xl font-bold text-lg shadow-[0_20px_40px_-10px_rgba(217,119,6,0.5)] transition-all transform hover:-translate-y-1 active:scale-95">
           Get Started Now
         </button>
         <div class="flex -space-x-3 items-center ml-2">
@@ -83,7 +103,7 @@
           <span class="pl-6 text-sm font-semibold text-slate-500 underline">Join 10k+ users</span>
         </div>
       </div>
-      
+
       <!-- Trust Badges -->
       <div class="mt-16 flex gap-8 items-center opacity-60">
         <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Regulated By</span>
@@ -97,9 +117,10 @@
       <div class="absolute -top-20 -left-20 w-64 h-64 bg-amber-300/30 rounded-full blur-3xl"></div>
       <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-orange-300/30 rounded-full blur-3xl"></div>
       <img src="inuka_hero_finance_1780490725366.png" alt="Inuka Hero" class="relative w-full z-10 float-anim">
-      
+
       <!-- Floating Info Card -->
-      <div class="absolute bottom-10 -left-6 z-20 glass-card p-4 rounded-2xl shadow-xl max-w-[200px] border border-white/50">
+      <div
+        class="absolute bottom-10 -left-6 z-20 glass-card p-4 rounded-2xl shadow-xl max-w-[200px] border border-white/50">
         <div class="flex items-center gap-3 mb-2">
           <div class="p-2 bg-green-500 rounded-lg text-white">✓</div>
           <span class="text-sm font-bold">Approved</span>
@@ -131,10 +152,11 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js').catch(() => {});
+        navigator.serviceWorker.register('/service-worker.js').catch(() => { });
       });
     }
   </script>
 
 </body>
+
 </html>
